@@ -9,13 +9,13 @@ public class Event {
 
     private EventType eventType;
 
-    private TriggerMethod observer;
+    private ListenerMethod observer;
 
-    private Component source;
+    private TriggerMethod source;
 
     private Method trigger;
 
-    public Event(EventType eventType, TriggerMethod observer, Method trigger) {
+    public Event(EventType eventType, ListenerMethod observer, Method trigger) {
         this.eventType = eventType;
         this.observer = observer;
         this.trigger = trigger;
@@ -29,11 +29,11 @@ public class Event {
         this.eventType = eventType;
     }
 
-    public TriggerMethod getObserver() {
+    public ListenerMethod getObserver() {
         return observer;
     }
 
-    public void setObserver(TriggerMethod observer) {
+    public void setObserver(ListenerMethod observer) {
         this.observer = observer;
     }
 
@@ -45,11 +45,11 @@ public class Event {
         this.trigger = trigger;
     }
 
-    public Component getSource() {
+    public TriggerMethod getSource() {
         return source;
     }
 
-    public void setSource(Component source) {
+    public void setSource(TriggerMethod source) {
         this.source = source;
     }
 

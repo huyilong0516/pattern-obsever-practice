@@ -7,7 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Created by admin on 2018/11/1.
  */
-public abstract class EventListener implements TriggerMethod{
+public abstract class EventListener implements ListenerMethod {
 
 
 //    private final static Map<EventType, Event> eventsMap =
@@ -33,7 +33,7 @@ public abstract class EventListener implements TriggerMethod{
     }
 
 
-    public static abstract class EventTrigger implements Component{
+    public static abstract class EventTrigger implements TriggerMethod {
 
         private final static Map<EventType, Event> eventsMap = new ConcurrentHashMap();
 

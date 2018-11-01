@@ -5,9 +5,9 @@ package indi.yoalone.pattern.observer.core;
  */
 public interface TriggerMethod {
 
-    void onConnect(Event event);
+    void connect();
 
-    void onSendMsg(Event event);
+    void sendMsg();
 
-    void onClose(Event event);
+    void close();
 }
