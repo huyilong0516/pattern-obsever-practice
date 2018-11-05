@@ -1,6 +1,7 @@
 package indi.yoalone.pattern.observer.core;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -35,7 +36,7 @@ public abstract class EventListener implements ListenerMethod {
 
     public static abstract class EventTrigger implements TriggerMethod {
 
-        private final static Map<EventType, Event> eventsMap = new ConcurrentHashMap();
+        private final static Map<EventType, Event> eventsMap = new ConcurrentHashMap<EventType, Event>(6);
 
 
 
