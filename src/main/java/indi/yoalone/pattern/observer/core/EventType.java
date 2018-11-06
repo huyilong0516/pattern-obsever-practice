@@ -5,7 +5,7 @@ package indi.yoalone.pattern.observer.core;
  */
 public enum EventType {
 
-    TRIGGER_START,
-    TRIGGER_PROCESS,
-    TRIGGER_END;
+    CONNECT,
+    SENDMSG,
+    CLOSE;
 }

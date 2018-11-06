@@ -1,6 +1,9 @@
 package indi.yoalone.pattern.observer.core;
 
+import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -18,14 +21,14 @@ public abstract class EventListener implements ListenerMethod {
 
 
     public void addListener() {
-        try {
-            addListener(new Event(EventType.TRIGGER_START, this, this.getClass().getMethod("onConnect", Event.class)));
-            addListener(new Event(EventType.TRIGGER_PROCESS, this, this.getClass().getMethod("onSendMsg", Event.class)));
-            addListener(new Event(EventType.TRIGGER_END, this, this.getClass().getMethod("onClose", Event.class)));
-
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
+        for (EventType eventType : EventType.values()) {
+            for (Method m : this.getClass().getMethods()) {
+                if (m.getName().toLowerCase().contains(eventType.name().toLowerCase())) {
+                    addListener(new Event(eventType, this, m));
+                }
+            }
         }
+
     }
 
 
@@ -41,8 +44,7 @@ public abstract class EventListener implements ListenerMethod {
 
 
 
-
-        protected void trigger(EventType type) {
+        private void trigger(EventType type) {
             if (!eventsMap.containsKey(type)) {
                 return;
             }
@@ -59,5 +61,27 @@ public abstract class EventListener implements ListenerMethod {
         }
 
 
+
+
+    }
+
+
+    public static class EventTriggerProxy implements InvocationHandler {
+
+        private EventTrigger trigger;
+
+        private EventTriggerProxy(EventTrigger trigger) {
+            this.trigger = trigger;
+        }
+
+        public static TriggerMethod getInstance(EventTrigger trigger) {
+            return (TriggerMethod) Proxy.newProxyInstance(trigger.getClass().getClassLoader(), EventTrigger.class.getInterfaces(), new EventTriggerProxy(trigger));
+        }
+
+        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+            method.invoke(trigger, (Object[]) null);
+            trigger.trigger(EventType.valueOf(method.getName().toUpperCase()));
+            return null;
+        }
     }
 }

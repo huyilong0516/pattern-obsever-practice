@@ -1,5 +1,7 @@
 package indi.yoalone.pattern.observer.test;
 
+import indi.yoalone.pattern.observer.core.EventListener;
+import indi.yoalone.pattern.observer.core.TriggerMethod;
 import indi.yoalone.pattern.observer.practice.Keyboard;
 import indi.yoalone.pattern.observer.practice.Mouse;
 import indi.yoalone.pattern.observer.practice.observer.Computer;
@@ -14,17 +16,19 @@ public class ObserverTest {
         computer.addListener();
 
         Mouse mouse = new Mouse();
+        TriggerMethod mouseProxy = EventListener.EventTriggerProxy.getInstance(mouse);
         Keyboard keyboard = new Keyboard();
+        TriggerMethod keyboardProxy = EventListener.EventTriggerProxy.getInstance(keyboard);
 
-        keyboard.connect();
-        mouse.connect();
+        keyboardProxy.connect();
+        mouseProxy.connect();
 
-        mouse.sendMsg();
-        keyboard.sendMsg();
+        mouseProxy.sendMsg();
+        keyboardProxy.sendMsg();
 
-        keyboard.close();
+        keyboardProxy.close();
 
-        mouse.close();
+        mouseProxy.close();
 
     }
 }

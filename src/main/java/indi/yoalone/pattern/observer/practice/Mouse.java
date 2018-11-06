@@ -12,16 +12,13 @@ public class Mouse extends EventListener.EventTrigger {
 
     public void connect() {
         System.out.println("鼠标开始连接到电脑。。。");
-        trigger(EventType.TRIGGER_START);
     }
 
     public void sendMsg() {
         System.out.println("鼠标开始工作。。");
-        trigger(EventType.TRIGGER_PROCESS);
     }
 
     public void close() {
         System.out.println("鼠标断开连接。");
-        trigger(EventType.TRIGGER_END);
     }
 }

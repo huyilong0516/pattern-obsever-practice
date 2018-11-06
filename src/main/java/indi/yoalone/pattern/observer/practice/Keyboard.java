@@ -12,16 +12,13 @@ public class Keyboard extends EventListener.EventTrigger {
 
     public void connect() {
         System.out.println("键盘开始连接到电脑。。。");
-        trigger(EventType.TRIGGER_START);
     }
 
     public void sendMsg() {
         System.out.println("键盘开始工作。。");
-        trigger(EventType.TRIGGER_PROCESS);
     }
 
     public void close() {
         System.out.println("键盘断开连接。");
-        trigger(EventType.TRIGGER_END);
     }
 }
